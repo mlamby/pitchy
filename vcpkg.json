@@ -1,0 +1,9 @@
+{
+  "name": "pitchy",
+  "version-string": "0.0.1",
+  "dependencies": [
+    "rtmidi",
+    "argh",
+    "catch2"
+  ]
+}
