@@ -24,75 +24,78 @@ TEST_CASE("to_semitones", "interval_test")
   REQUIRE(0 == cu);
 }
 
-TEST_CASE("raise", "interval_test")
+TEST_CASE("raise_midi", "interval_test")
 {
-  REQUIRE(midi_note::C5 == raise(midi_note::C5, interval::root));
-  REQUIRE(midi_note::Cs5 == raise(midi_note::C5, interval::minor_second));
-  REQUIRE(midi_note::D5 == raise(midi_note::C5, interval::major_second));
-  REQUIRE(midi_note::Ds5 == raise(midi_note::C5, interval::minor_third));
-  REQUIRE(midi_note::E5 == raise(midi_note::C5, interval::major_third));
-  REQUIRE(midi_note::F5 == raise(midi_note::C5, interval::perfect_fourth));
-  REQUIRE(midi_note::Fs5 == raise(midi_note::C5, interval::augmented_fourth));
-  REQUIRE(midi_note::G5 == raise(midi_note::C5, interval::perfect_fifth));
-  REQUIRE(midi_note::Gs5 == raise(midi_note::C5, interval::minor_sixth));
-  REQUIRE(midi_note::A5 == raise(midi_note::C5, interval::major_sixth));
-  REQUIRE(midi_note::As5 == raise(midi_note::C5, interval::minor_seventh));
-  REQUIRE(midi_note::B5 == raise(midi_note::C5, interval::major_seventh));
-  REQUIRE(midi_note::C6 == raise(midi_note::C5, interval::perfect_octave));
+  REQUIRE(midi_note::C5 == raise_midi(midi_note::C5, interval::root));
+  REQUIRE(midi_note::Cs5 == raise_midi(midi_note::C5, interval::minor_second));
+  REQUIRE(midi_note::D5 == raise_midi(midi_note::C5, interval::major_second));
+  REQUIRE(midi_note::Ds5 == raise_midi(midi_note::C5, interval::minor_third));
+  REQUIRE(midi_note::E5 == raise_midi(midi_note::C5, interval::major_third));
+  REQUIRE(midi_note::F5 == raise_midi(midi_note::C5, interval::perfect_fourth));
+  REQUIRE(midi_note::Fs5 == raise_midi(midi_note::C5, interval::augmented_fourth));
+  REQUIRE(midi_note::G5 == raise_midi(midi_note::C5, interval::perfect_fifth));
+  REQUIRE(midi_note::Gs5 == raise_midi(midi_note::C5, interval::minor_sixth));
+  REQUIRE(midi_note::A5 == raise_midi(midi_note::C5, interval::major_sixth));
+  REQUIRE(midi_note::As5 == raise_midi(midi_note::C5, interval::minor_seventh));
+  REQUIRE(midi_note::B5 == raise_midi(midi_note::C5, interval::major_seventh));
+  REQUIRE(midi_note::C6 == raise_midi(midi_note::C5, interval::perfect_octave));
 
-  constexpr auto cu = raise(midi_note::C5, interval::root);
+  constexpr auto cu = raise_midi(midi_note::C5, interval::root);
   REQUIRE(midi_note::C5 == cu);
 }
 
-TEST_CASE("lower", "interval_test")
+TEST_CASE("raise_note", "interval_test")
 {
-  REQUIRE(midi_note::C5 == lower(midi_note::C5, interval::root));
-  REQUIRE(midi_note::B4 == lower(midi_note::C5, interval::minor_second));
-  REQUIRE(midi_note::As4 == lower(midi_note::C5, interval::major_second));
-  REQUIRE(midi_note::A4 == lower(midi_note::C5, interval::minor_third));
-  REQUIRE(midi_note::Gs4 == lower(midi_note::C5, interval::major_third));
-  REQUIRE(midi_note::G4 == lower(midi_note::C5, interval::perfect_fourth));
-  REQUIRE(midi_note::Fs4 == lower(midi_note::C5, interval::augmented_fourth));
-  REQUIRE(midi_note::F4 == lower(midi_note::C5, interval::perfect_fifth));
-  REQUIRE(midi_note::E4 == lower(midi_note::C5, interval::minor_sixth));
-  REQUIRE(midi_note::Ds4 == lower(midi_note::C5, interval::major_sixth));
-  REQUIRE(midi_note::D4 == lower(midi_note::C5, interval::minor_seventh));
-  REQUIRE(midi_note::Cs4 == lower(midi_note::C5, interval::major_seventh));
-  REQUIRE(midi_note::C4 == lower(midi_note::C5, interval::perfect_octave));
+  REQUIRE(note::C == raise_note(note::C, interval::root));
+  REQUIRE(note::Cs == raise_note(note::C, interval::minor_second));
+  REQUIRE(note::D == raise_note(note::C, interval::major_second));
+  REQUIRE(note::Ds == raise_note(note::C, interval::minor_third));
+  REQUIRE(note::E == raise_note(note::C, interval::major_third));
+  REQUIRE(note::F == raise_note(note::C, interval::perfect_fourth));
+  REQUIRE(note::Fs == raise_note(note::C, interval::augmented_fourth));
+  REQUIRE(note::G == raise_note(note::C, interval::perfect_fifth));
+  REQUIRE(note::Gs == raise_note(note::C, interval::minor_sixth));
+  REQUIRE(note::A == raise_note(note::C, interval::major_sixth));
+  REQUIRE(note::As == raise_note(note::C, interval::minor_seventh));
+  REQUIRE(note::B == raise_note(note::C, interval::major_seventh));
+  REQUIRE(note::C == raise_note(note::C, interval::perfect_octave));
+}
 
-  constexpr auto cu = lower(midi_note::C5, interval::root);
+TEST_CASE("lower_midi", "interval_test")
+{
+  REQUIRE(midi_note::C5 == lower_midi(midi_note::C5, interval::root));
+  REQUIRE(midi_note::B4 == lower_midi(midi_note::C5, interval::minor_second));
+  REQUIRE(midi_note::As4 == lower_midi(midi_note::C5, interval::major_second));
+  REQUIRE(midi_note::A4 == lower_midi(midi_note::C5, interval::minor_third));
+  REQUIRE(midi_note::Gs4 == lower_midi(midi_note::C5, interval::major_third));
+  REQUIRE(midi_note::G4 == lower_midi(midi_note::C5, interval::perfect_fourth));
+  REQUIRE(midi_note::Fs4 == lower_midi(midi_note::C5, interval::augmented_fourth));
+  REQUIRE(midi_note::F4 == lower_midi(midi_note::C5, interval::perfect_fifth));
+  REQUIRE(midi_note::E4 == lower_midi(midi_note::C5, interval::minor_sixth));
+  REQUIRE(midi_note::Ds4 == lower_midi(midi_note::C5, interval::major_sixth));
+  REQUIRE(midi_note::D4 == lower_midi(midi_note::C5, interval::minor_seventh));
+  REQUIRE(midi_note::Cs4 == lower_midi(midi_note::C5, interval::major_seventh));
+  REQUIRE(midi_note::C4 == lower_midi(midi_note::C5, interval::perfect_octave));
+
+  constexpr auto cu = lower_midi(midi_note::C5, interval::root);
   REQUIRE(midi_note::C5 == cu);
 }
 
-TEST_CASE("difference", "interval_test")
+TEST_CASE("lower_note", "interval_test")
 {
-  REQUIRE(0 == difference(midi_note::C5, midi_note::C5));
-  REQUIRE(1 == difference(midi_note::C5, midi_note::B4));
-  REQUIRE(2 == difference(midi_note::C5, midi_note::As4));
-  REQUIRE(3 == difference(midi_note::C5, midi_note::A4));
-  REQUIRE(4 == difference(midi_note::C5, midi_note::Gs4));
-  REQUIRE(5 == difference(midi_note::C5, midi_note::G4));
-  REQUIRE(6 == difference(midi_note::C5, midi_note::Fs4));
-  REQUIRE(7 == difference(midi_note::C5, midi_note::F4));
-  REQUIRE(8 == difference(midi_note::C5, midi_note::E4));
-  REQUIRE(9 == difference(midi_note::C5, midi_note::Ds4));
-  REQUIRE(10 == difference(midi_note::C5, midi_note::D4));
-  REQUIRE(11 == difference(midi_note::C5, midi_note::Cs4));
-  REQUIRE(12 == difference(midi_note::C5, midi_note::C4));
-
-  REQUIRE(0 == difference(midi_note::C5, midi_note::C5));
-  REQUIRE(1 == difference(midi_note::B4, midi_note::C5));
-  REQUIRE(2 == difference(midi_note::As4, midi_note::C5));
-  REQUIRE(3 == difference(midi_note::A4, midi_note::C5));
-  REQUIRE(4 == difference(midi_note::Gs4, midi_note::C5));
-  REQUIRE(5 == difference(midi_note::G4, midi_note::C5));
-  REQUIRE(6 == difference(midi_note::Fs4, midi_note::C5));
-  REQUIRE(7 == difference(midi_note::F4, midi_note::C5));
-  REQUIRE(8 == difference(midi_note::E4, midi_note::C5));
-  REQUIRE(9 == difference(midi_note::Ds4, midi_note::C5));
-  REQUIRE(10 == difference(midi_note::D4, midi_note::C5));
-  REQUIRE(11 == difference(midi_note::Cs4, midi_note::C5));
-  REQUIRE(12 == difference(midi_note::C4, midi_note::C5));
+  REQUIRE(note::C  == lower_note(note::C, interval::root));
+  REQUIRE(note::B  == lower_note(note::C, interval::minor_second));
+  REQUIRE(note::As == lower_note(note::C, interval::major_second));
+  REQUIRE(note::A  == lower_note(note::C, interval::minor_third));
+  REQUIRE(note::Gs == lower_note(note::C, interval::major_third));
+  REQUIRE(note::G  == lower_note(note::C, interval::perfect_fourth));
+  REQUIRE(note::Fs == lower_note(note::C, interval::augmented_fourth));
+  REQUIRE(note::F  == lower_note(note::C, interval::perfect_fifth));
+  REQUIRE(note::E  == lower_note(note::C, interval::minor_sixth));
+  REQUIRE(note::Ds == lower_note(note::C, interval::major_sixth));
+  REQUIRE(note::D  == lower_note(note::C, interval::minor_seventh));
+  REQUIRE(note::Cs == lower_note(note::C, interval::major_seventh));
+  REQUIRE(note::C  == lower_note(note::C, interval::perfect_octave));
 }
 
 TEST_CASE("note_interval_test", "")

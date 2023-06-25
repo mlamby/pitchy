@@ -31,25 +31,42 @@ namespace pitchy
     return static_cast<int8_t>(i);
   }
 
-  constexpr midi_note raise(midi_note root, interval i)
+  // Raise the  midi note by the given interval.
+  // Eg raise C4 by a major_third - returns E4
+  // Raise B4 by perfect_fifth - returns Fs5
+  constexpr midi_note raise_midi(midi_note root, interval i)
   {
     return midi_value_to_note(note_to_midi_value(root) + semitones(i));
   }
 
-  constexpr midi_note lower(midi_note root, interval i)
+  // Raise the octaveless note by the given interval
+  // Raise C by major_third - returns E.
+  // Raise B by perfect_fifth - returns Fs
+  constexpr note raise_note(note root, interval i)
+  {
+    auto value = static_cast<std::underlying_type_t<note>>(root) + semitones(i);
+    return static_cast<note>(value % 12);
+  }
+
+  // Lower the midi note by the given interval.
+  // Eg lower Cs4 by a major_third - returns A3
+  // Raise Fs5 by perfect_fifth - returns B4
+  constexpr midi_note lower_midi(midi_note root, interval i)
   {
     return midi_value_to_note(note_to_midi_value(root) - semitones(i));
   }
 
-  constexpr int8_t difference(midi_note first, midi_note second)
+  // Lower the octaveless note by the given interval.
+  // Eg lower Cs by a major_third - returns A
+  // Raise Fs by perfect_fifth - returns B
+  constexpr note lower_note(note root, interval i)
   {
-    auto f = note_to_midi_value(first);
-    auto s = note_to_midi_value(second);
-
-    if (f > s)
-      return f - s;
-
-    return s - f;
+    auto value = static_cast<std::underlying_type_t<note>>(root) - semitones(i);
+    if(value < 0)
+    {
+      value += 12;
+    }
+    return static_cast<note>(value % 12);
   }
 
   // Return the interval between a pair of notes.

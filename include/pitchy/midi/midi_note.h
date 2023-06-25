@@ -152,6 +152,14 @@ namespace pitchy
     return static_cast<note>(note_to_midi_value(n) % 12);
   }
 
+  // Convert a note and octave pair to a midi note.
+  constexpr midi_note add_octave(note n, uint8_t o)
+  {
+    auto value = static_cast<std::underlying_type_t<note>>(n);
+    value += ((o + 1) * 12);
+    return midi_value_to_note(value);
+  }
+
   // Return the octave number of the note.
   // midi_note::A2 becomes 2, B0 becomes 0, etc.
   constexpr uint8_t get_octave(midi_note n)
