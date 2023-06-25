@@ -94,3 +94,45 @@ TEST_CASE("difference", "interval_test")
   REQUIRE(11 == difference(midi_note::Cs4, midi_note::C5));
   REQUIRE(12 == difference(midi_note::C4, midi_note::C5));
 }
+
+TEST_CASE("note_interval_test", "")
+{
+  REQUIRE(note_interval(note::C, note::C) == interval::root);
+  REQUIRE(note_interval(note::C, note::Cs) == interval::minor_second);
+  REQUIRE(note_interval(note::C, note::D) == interval::major_second);
+  REQUIRE(note_interval(note::C, note::Ds) == interval::minor_third);
+  REQUIRE(note_interval(note::C, note::E) == interval::major_third);
+  REQUIRE(note_interval(note::C, note::F) == interval::perfect_fourth);
+  REQUIRE(note_interval(note::C, note::Fs) == interval::augmented_fourth);
+  REQUIRE(note_interval(note::C, note::G) == interval::perfect_fifth);
+  REQUIRE(note_interval(note::C, note::Gs) == interval::minor_sixth);
+  REQUIRE(note_interval(note::C, note::A) == interval::major_sixth);
+  REQUIRE(note_interval(note::C, note::As) == interval::minor_seventh);
+  REQUIRE(note_interval(note::C, note::B) == interval::major_seventh);
+
+  REQUIRE(note_interval(note::G, note::G) == interval::root);
+  REQUIRE(note_interval(note::G, note::Gs) == interval::minor_second);
+  REQUIRE(note_interval(note::G, note::A) == interval::major_second);
+  REQUIRE(note_interval(note::G, note::As) == interval::minor_third);
+  REQUIRE(note_interval(note::G, note::B) == interval::major_third);
+  REQUIRE(note_interval(note::G, note::C) == interval::perfect_fourth);
+  REQUIRE(note_interval(note::G, note::Cs) == interval::augmented_fourth);
+  REQUIRE(note_interval(note::G, note::D) == interval::perfect_fifth);
+  REQUIRE(note_interval(note::G, note::Ds) == interval::minor_sixth);
+  REQUIRE(note_interval(note::G, note::E) == interval::major_sixth);
+  REQUIRE(note_interval(note::G, note::F) == interval::minor_seventh);
+  REQUIRE(note_interval(note::G, note::Fs) == interval::major_seventh);
+
+  REQUIRE(note_interval(note::B, note::B) == interval::root);
+  REQUIRE(note_interval(note::B, note::C) == interval::minor_second);
+  REQUIRE(note_interval(note::B, note::Cs) == interval::major_second);
+  REQUIRE(note_interval(note::B, note::D) == interval::minor_third);
+  REQUIRE(note_interval(note::B, note::Ds) == interval::major_third);
+  REQUIRE(note_interval(note::B, note::E) == interval::perfect_fourth);
+  REQUIRE(note_interval(note::B, note::F) == interval::augmented_fourth);
+  REQUIRE(note_interval(note::B, note::Fs) == interval::perfect_fifth);
+  REQUIRE(note_interval(note::B, note::G) == interval::minor_sixth);
+  REQUIRE(note_interval(note::B, note::Gs) == interval::major_sixth);
+  REQUIRE(note_interval(note::B, note::A) == interval::minor_seventh);
+  REQUIRE(note_interval(note::B, note::As) == interval::major_seventh);
+} 

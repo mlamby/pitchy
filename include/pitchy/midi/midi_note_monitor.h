@@ -1,7 +1,7 @@
 #ifndef PITCHY_MIDI_NOTE_MONITOR_H
 #define PITCHY_MIDI_NOTE_MONITOR_H
 
-#include "midi_source.h"
+#include "pitchy/midi/midi_source.h"
 
 #include <vector>
 #include <algorithm>

@@ -99,47 +99,47 @@ TEST_CASE("chord_recognise_major_test", "")
   auto b_major_over_fs = expected(note::B, chord_type::major, note::Fs);
 
   REQUIRE(
-    recognise_chord({midi_note::C4, midi_note::E4, midi_note::G4}) ==
+    find_all_chords({midi_note::C4, midi_note::E4, midi_note::G4}) ==
     c_major_root_position);
   REQUIRE(
-    recognise_chord({midi_note::B3, midi_note::Ds4, midi_note::Fs4}) ==
+    find_all_chords({midi_note::B3, midi_note::Ds4, midi_note::Fs4}) ==
     b_major_root_position);
 
   // The ordering of the notes in the array is not important
   REQUIRE(
-    recognise_chord({midi_note::E4, midi_note::G4, midi_note::C4}) ==
+    find_all_chords({midi_note::E4, midi_note::G4, midi_note::C4}) ==
     c_major_root_position);
   REQUIRE(
-    recognise_chord({midi_note::Ds4, midi_note::B3, midi_note::Fs4}) ==
+    find_all_chords({midi_note::Ds4, midi_note::B3, midi_note::Fs4}) ==
     b_major_root_position);
 
   // Repeated notes are ignored
   REQUIRE(
-    recognise_chord(
+    find_all_chords(
       {midi_note::C3, midi_note::G3, midi_note::C4, midi_note::E4}) ==
     c_major_root_position);
   REQUIRE(
-    recognise_chord(
+    find_all_chords(
       {midi_note::B3, midi_note::Ds4, midi_note::Fs4, midi_note::B4}) ==
     b_major_root_position);
 
   // Slash chords are recognised
   REQUIRE(
-    recognise_chord({midi_note::E4, midi_note::G4, midi_note::C5}) ==
+    find_all_chords({midi_note::E4, midi_note::G4, midi_note::C5}) ==
     c_major_over_e);
   REQUIRE(
-    recognise_chord({midi_note::Fs4, midi_note::Ds5, midi_note::B5}) ==
+    find_all_chords({midi_note::Fs4, midi_note::Ds5, midi_note::B5}) ==
     b_major_over_fs);
 
   REQUIRE(
-    recognise_chord(
+    find_all_chords(
       {midi_note::E3,
        midi_note::C4,
        midi_note::E4,
        midi_note::G4,
        midi_note::C5}) == c_major_over_e);
   REQUIRE(
-    recognise_chord(
+    find_all_chords(
       {midi_note::Fs4,
        midi_note::Ds5,
        midi_note::B5,
@@ -155,44 +155,44 @@ TEST_CASE("chord_recognise_minor_test", "")
   auto b_minor_over_fs = expected(note::B, chord_type::minor, note::Fs);
 
   REQUIRE(
-    recognise_chord({midi_note::C4, midi_note::Ds4, midi_note::G4}) ==
+    find_all_chords({midi_note::C4, midi_note::Ds4, midi_note::G4}) ==
     c_minor_root_position);
   REQUIRE(
-    recognise_chord({midi_note::B3, midi_note::D4, midi_note::Fs4}) ==
+    find_all_chords({midi_note::B3, midi_note::D4, midi_note::Fs4}) ==
     b_minor_root_position);
 
   // The ordering of the notes in the array is not important
   REQUIRE(
-    recognise_chord({midi_note::Ds4, midi_note::G4, midi_note::C4}) ==
+    find_all_chords({midi_note::Ds4, midi_note::G4, midi_note::C4}) ==
     c_minor_root_position);
   REQUIRE(
-    recognise_chord({midi_note::D4, midi_note::B3, midi_note::Fs4}) ==
+    find_all_chords({midi_note::D4, midi_note::B3, midi_note::Fs4}) ==
     b_minor_root_position);
 
   // Repeated notes are ignored
   REQUIRE(
-    recognise_chord(
+    find_all_chords(
       {midi_note::C3, midi_note::G3, midi_note::C4, midi_note::Ds4}) ==
     c_minor_root_position);
   REQUIRE(
-    recognise_chord(
+    find_all_chords(
       {midi_note::B3, midi_note::D4, midi_note::Fs4, midi_note::B4}) ==
     b_minor_root_position);
 
   // Slash chords are recognised
   REQUIRE(
-    recognise_chord({midi_note::Ds4, midi_note::G4, midi_note::C5}) ==
+    find_all_chords({midi_note::Ds4, midi_note::G4, midi_note::C5}) ==
     c_minor_over_eb);
   REQUIRE(
-    recognise_chord({midi_note::Fs4, midi_note::D5, midi_note::B5}) ==
+    find_all_chords({midi_note::Fs4, midi_note::D5, midi_note::B5}) ==
     b_minor_over_fs);
 
   REQUIRE(
-    recognise_chord(
+    find_all_chords(
       {midi_note::Ds4, midi_note::G4, midi_note::C5, midi_note::Ds5}) ==
     c_minor_over_eb);
   REQUIRE(
-    recognise_chord(
+    find_all_chords(
       {midi_note::Fs4,
        midi_note::D5,
        midi_note::B5,
@@ -206,12 +206,12 @@ TEST_CASE("chord_recognise_major7_test", "")
   auto d_major7_over_cs = expected(note::D, chord_type::major7, note::Cs);
 
   REQUIRE(
-    recognise_chord(
+    find_all_chords(
       {midi_note::D3, midi_note::Fs3, midi_note::A3, midi_note::Cs4}) ==
     d_major7_root_position);
 
   REQUIRE(
-    recognise_chord(
+    find_all_chords(
       {midi_note::D3,
        midi_note::D4,
        midi_note::Fs3,
@@ -221,7 +221,7 @@ TEST_CASE("chord_recognise_major7_test", "")
        midi_note::Cs4}) == d_major7_root_position);
 
   REQUIRE(
-    recognise_chord(
+    find_all_chords(
       {midi_note::Cs3, midi_note::Fs3, midi_note::A3, midi_note::D4}) ==
     d_major7_over_cs);
 }
@@ -232,12 +232,12 @@ TEST_CASE("chord_recognise_minor7_test", "")
   auto e_minor7_over_d = expected(note::E, chord_type::minor7, note::D);
 
   REQUIRE(
-    recognise_chord(
+    find_all_chords(
       {midi_note::E3, midi_note::G3, midi_note::B3, midi_note::D4}) ==
     e_minor7_root_position);
 
   REQUIRE(
-    recognise_chord(
+    find_all_chords(
       {midi_note::E3,
        midi_note::E4,
        midi_note::G3,
@@ -247,7 +247,7 @@ TEST_CASE("chord_recognise_minor7_test", "")
        midi_note::D4}) == e_minor7_root_position);
 
   REQUIRE(
-    recognise_chord(
+    find_all_chords(
       {midi_note::D3, midi_note::B3, midi_note::G4, midi_note::E5}) ==
     e_minor7_over_d);
 }
@@ -258,12 +258,12 @@ TEST_CASE("chord_recognise_dominant_test", "")
   auto f_dom_over_ds = expected(note::F, chord_type::dominant, note::Ds);
 
   REQUIRE(
-    recognise_chord(
+    find_all_chords(
       {midi_note::F2, midi_note::A2, midi_note::C3, midi_note::Ds3}) ==
     f_dom_root_position);
 
   REQUIRE(
-    recognise_chord(
+    find_all_chords(
       {midi_note::F3,
        midi_note::F4,
        midi_note::A3,
@@ -273,7 +273,7 @@ TEST_CASE("chord_recognise_dominant_test", "")
        midi_note::Ds4}) == f_dom_root_position);
 
   REQUIRE(
-    recognise_chord(
+    find_all_chords(
       {midi_note::Ds3, midi_note::F3, midi_note::A3, midi_note::C4}) ==
     f_dom_over_ds);
 }
@@ -290,11 +290,11 @@ TEST_CASE("chord_recognise_sus_chords_test", "")
   // Sus2 and Sus4 chords are invesions of each other.
 
   REQUIRE(
-    recognise_chord({midi_note::G3, midi_note::A3, midi_note::D4}) ==
+    find_all_chords({midi_note::G3, midi_note::A3, midi_note::D4}) ==
     merge(d_sus4_over_g, g_sus2_root_position));
 
   REQUIRE(
-    recognise_chord(
+    find_all_chords(
       {midi_note::G3,
        midi_note::G4,
        midi_note::A3,
@@ -303,6 +303,6 @@ TEST_CASE("chord_recognise_sus_chords_test", "")
        midi_note::D5}) == merge(d_sus4_over_g, g_sus2_root_position));
 
   REQUIRE(
-    recognise_chord({midi_note::D3, midi_note::A3, midi_note::G4}) ==
+    find_all_chords({midi_note::D3, midi_note::A3, midi_note::G4}) ==
     merge(d_sus4_root_position, g_sus2_over_d));
 }

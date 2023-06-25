@@ -1,7 +1,7 @@
 #ifndef PITCHY_MIDI_SOURCE_H
 #define PITCHY_MIDI_SOURCE_H
 
-#include "midi_message.h"
+#include "pitchy/midi/midi_message.h"
 
 #include <memory>
 #include <string>

@@ -1,7 +1,8 @@
 #ifndef MIDI_LIB_INTERVAL_H
 #define MIDI_LIB_INTERVAL_H
 
-#include "midi/midi_note.h"
+#include "pitchy/midi/midi_note.h"
+#include "pitchy/note.h"
 
 namespace pitchy
 {
@@ -50,6 +51,27 @@ namespace pitchy
 
     return s - f;
   }
+
+  // Return the interval between a pair of notes.
+  // The interval is always calculated as moving up from the root
+  // note to the second note.
+  constexpr interval note_interval(note root_note, note second_note)
+  {
+    auto root_value = static_cast<std::underlying_type_t<note>>(root_note);
+    auto second_value = static_cast<std::underlying_type_t<note>>(second_note);
+    std::underlying_type_t<interval> result = 0;
+
+    if (root_value > second_value)
+    {
+      // The second note is below the root note in enumerated value.
+      // Move the second note up by an octave.
+      second_value += 12;
+    }
+
+    result = second_value - root_value;
+    return static_cast<interval>(result);
+  }
+  
 } // namespace pitchy
 
 #endif

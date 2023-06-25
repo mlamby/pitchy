@@ -1,7 +1,7 @@
 #ifndef PITCHY_MIDI_MESSAGE_H
 #define PITCHY_MIDI_MESSAGE_H
 
-#include "midi_note.h"
+#include "pitchy/midi/midi_note.h"
 
 #include <cstdint>
 #include <variant>

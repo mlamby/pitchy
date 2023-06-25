@@ -1,8 +1,11 @@
 #ifndef PITCHY_MIDI_NOTE_H
 #define PITCHY_MIDI_NOTE_H
 
+#include "pitchy/note.h"
+
 #include <cstdint>
 #include <cstddef>
+#include <format>
 
 namespace pitchy
 {
@@ -128,7 +131,7 @@ namespace pitchy
   }
 
   // Convert the midi value to an enum.
-  // This expects that the midi value is a valid midi value, which can 
+  // This expects that the midi value is a valid midi value, which can
   // be checked using is_valid_midi_value().
   constexpr midi_note midi_value_to_note(uint8_t n)
   {
@@ -140,6 +143,25 @@ namespace pitchy
   {
     // Midi values must be between 21 (A0) and 127 (G9)
     return (v >= 21) && (v <= 127);
+  }
+
+  // Remove the octave from a midi note.
+  // midi_note::A2 becomes note::A, etc.
+  constexpr note remove_octave(midi_note n)
+  {
+    return static_cast<note>(note_to_midi_value(n) % 12);
+  }
+
+  // Return the octave number of the note.
+  // midi_note::A2 becomes 2, B0 becomes 0, etc.
+  constexpr uint8_t get_octave(midi_note n)
+  {
+    return static_cast<uint8_t>(note_to_midi_value(n) / 12) - 1;
+  }
+
+  inline std::string to_string(midi_note n)
+  {
+    return std::format("{}{}", to_string(remove_octave(n)), get_octave(n));
   }
 }
 

@@ -343,3 +343,243 @@ TEST_CASE("MidiNoteValidity", "midi_note_test")
   REQUIRE(is_valid_midi_value(126));
   REQUIRE(is_valid_midi_value(127));
 }
+
+TEST_CASE("RemoveOctaveTest", "midi_note_test")
+{
+  REQUIRE(0 == get_octave(midi_note::A0));
+  REQUIRE(0 == get_octave(midi_note::As0));
+  REQUIRE(0 == get_octave(midi_note::B0));
+
+  REQUIRE(1 == get_octave(midi_note::C1));
+  REQUIRE(1 == get_octave(midi_note::Cs1));
+  REQUIRE(1 == get_octave(midi_note::D1));
+  REQUIRE(1 == get_octave(midi_note::Ds1));
+  REQUIRE(1 == get_octave(midi_note::E1));
+  REQUIRE(1 == get_octave(midi_note::F1));
+  REQUIRE(1 == get_octave(midi_note::Fs1));
+  REQUIRE(1 == get_octave(midi_note::G1));
+  REQUIRE(1 == get_octave(midi_note::Gs1));
+  REQUIRE(1 == get_octave(midi_note::A1));
+  REQUIRE(1 == get_octave(midi_note::As1));
+  REQUIRE(1 == get_octave(midi_note::B1));
+
+  REQUIRE(2 == get_octave(midi_note::C2));
+  REQUIRE(2 == get_octave(midi_note::Cs2));
+  REQUIRE(2 == get_octave(midi_note::D2));
+  REQUIRE(2 == get_octave(midi_note::Ds2));
+  REQUIRE(2 == get_octave(midi_note::E2));
+  REQUIRE(2 == get_octave(midi_note::F2));
+  REQUIRE(2 == get_octave(midi_note::Fs2));
+  REQUIRE(2 == get_octave(midi_note::G2));
+  REQUIRE(2 == get_octave(midi_note::Gs2));
+  REQUIRE(2 == get_octave(midi_note::A2));
+  REQUIRE(2 == get_octave(midi_note::As2));
+  REQUIRE(2 == get_octave(midi_note::B2));
+
+  REQUIRE(3 == get_octave(midi_note::C3));
+  REQUIRE(3 == get_octave(midi_note::Cs3));
+  REQUIRE(3 == get_octave(midi_note::D3));
+  REQUIRE(3 == get_octave(midi_note::Ds3));
+  REQUIRE(3 == get_octave(midi_note::E3));
+  REQUIRE(3 == get_octave(midi_note::F3));
+  REQUIRE(3 == get_octave(midi_note::Fs3));
+  REQUIRE(3 == get_octave(midi_note::G3));
+  REQUIRE(3 == get_octave(midi_note::Gs3));
+  REQUIRE(3 == get_octave(midi_note::A3));
+  REQUIRE(3 == get_octave(midi_note::As3));
+  REQUIRE(3 == get_octave(midi_note::B3));
+
+  REQUIRE(4 == get_octave(midi_note::C4));
+  REQUIRE(4 == get_octave(midi_note::Cs4));
+  REQUIRE(4 == get_octave(midi_note::D4));
+  REQUIRE(4 == get_octave(midi_note::Ds4));
+  REQUIRE(4 == get_octave(midi_note::E4));
+  REQUIRE(4 == get_octave(midi_note::F4));
+  REQUIRE(4 == get_octave(midi_note::Fs4));
+  REQUIRE(4 == get_octave(midi_note::G4));
+  REQUIRE(4 == get_octave(midi_note::Gs4));
+  REQUIRE(4 == get_octave(midi_note::A4));
+  REQUIRE(4 == get_octave(midi_note::As4));
+  REQUIRE(4 == get_octave(midi_note::B4));
+
+  REQUIRE(5 == get_octave(midi_note::C5));
+  REQUIRE(5 == get_octave(midi_note::Cs5));
+  REQUIRE(5 == get_octave(midi_note::D5));
+  REQUIRE(5 == get_octave(midi_note::Ds5));
+  REQUIRE(5 == get_octave(midi_note::E5));
+  REQUIRE(5 == get_octave(midi_note::F5));
+  REQUIRE(5 == get_octave(midi_note::Fs5));
+  REQUIRE(5 == get_octave(midi_note::G5));
+  REQUIRE(5 == get_octave(midi_note::Gs5));
+  REQUIRE(5 == get_octave(midi_note::A5));
+  REQUIRE(5 == get_octave(midi_note::As5));
+  REQUIRE(5 == get_octave(midi_note::B5));
+
+  REQUIRE(6 == get_octave(midi_note::C6));
+  REQUIRE(6 == get_octave(midi_note::Cs6));
+  REQUIRE(6 == get_octave(midi_note::D6));
+  REQUIRE(6 == get_octave(midi_note::Ds6));
+  REQUIRE(6 == get_octave(midi_note::E6));
+  REQUIRE(6 == get_octave(midi_note::F6));
+  REQUIRE(6 == get_octave(midi_note::Fs6));
+  REQUIRE(6 == get_octave(midi_note::G6));
+  REQUIRE(6 == get_octave(midi_note::Gs6));
+  REQUIRE(6 == get_octave(midi_note::A6));
+  REQUIRE(6 == get_octave(midi_note::As6));
+  REQUIRE(6 == get_octave(midi_note::B6));
+
+  REQUIRE(7 == get_octave(midi_note::C7));
+  REQUIRE(7 == get_octave(midi_note::Cs7));
+  REQUIRE(7 == get_octave(midi_note::D7));
+  REQUIRE(7 == get_octave(midi_note::Ds7));
+  REQUIRE(7 == get_octave(midi_note::E7));
+  REQUIRE(7 == get_octave(midi_note::F7));
+  REQUIRE(7 == get_octave(midi_note::Fs7));
+  REQUIRE(7 == get_octave(midi_note::G7));
+  REQUIRE(7 == get_octave(midi_note::Gs7));
+  REQUIRE(7 == get_octave(midi_note::A7));
+  REQUIRE(7 == get_octave(midi_note::As7));
+  REQUIRE(7 == get_octave(midi_note::B7));
+
+  REQUIRE(8 == get_octave(midi_note::C8));
+  REQUIRE(8 == get_octave(midi_note::Cs8));
+  REQUIRE(8 == get_octave(midi_note::D8));
+  REQUIRE(8 == get_octave(midi_note::Ds8));
+  REQUIRE(8 == get_octave(midi_note::E8));
+  REQUIRE(8 == get_octave(midi_note::F8));
+  REQUIRE(8 == get_octave(midi_note::Fs8));
+  REQUIRE(8 == get_octave(midi_note::G8));
+  REQUIRE(8 == get_octave(midi_note::Gs8));
+  REQUIRE(8 == get_octave(midi_note::A8));
+  REQUIRE(8 == get_octave(midi_note::As8));
+  REQUIRE(8 == get_octave(midi_note::B8));
+
+  REQUIRE(9 == get_octave(midi_note::C9));
+  REQUIRE(9 == get_octave(midi_note::Cs9));
+  REQUIRE(9 == get_octave(midi_note::D9));
+  REQUIRE(9 == get_octave(midi_note::Ds9));
+  REQUIRE(9 == get_octave(midi_note::E9));
+  REQUIRE(9 == get_octave(midi_note::F9));
+  REQUIRE(9 == get_octave(midi_note::Fs9));
+  REQUIRE(9 == get_octave(midi_note::G9));
+}
+
+TEST_CASE("GetOctaveTest", "midi_note_test")
+{
+  REQUIRE(note::A  == remove_octave(midi_note::A0));
+  REQUIRE(note::As == remove_octave(midi_note::As0));
+  REQUIRE(note::B  == remove_octave(midi_note::B0));
+
+  REQUIRE(note::C  == remove_octave(midi_note::C2));
+  REQUIRE(note::Cs == remove_octave(midi_note::Cs1));
+  REQUIRE(note::D  == remove_octave(midi_note::D1));
+  REQUIRE(note::Ds == remove_octave(midi_note::Ds1));
+  REQUIRE(note::E  == remove_octave(midi_note::E1));
+  REQUIRE(note::F  == remove_octave(midi_note::F1));
+  REQUIRE(note::Fs == remove_octave(midi_note::Fs1));
+  REQUIRE(note::G  == remove_octave(midi_note::G1));
+  REQUIRE(note::Gs == remove_octave(midi_note::Gs1));
+  REQUIRE(note::A  == remove_octave(midi_note::A1));
+  REQUIRE(note::As == remove_octave(midi_note::As1));
+  REQUIRE(note::B  == remove_octave(midi_note::B1));
+
+  REQUIRE(note::C  == remove_octave(midi_note::C2));
+  REQUIRE(note::Cs == remove_octave(midi_note::Cs2));
+  REQUIRE(note::D  == remove_octave(midi_note::D2));
+  REQUIRE(note::Ds == remove_octave(midi_note::Ds2));
+  REQUIRE(note::E  == remove_octave(midi_note::E2));
+  REQUIRE(note::F  == remove_octave(midi_note::F2));
+  REQUIRE(note::Fs == remove_octave(midi_note::Fs2));
+  REQUIRE(note::G  == remove_octave(midi_note::G2));
+  REQUIRE(note::Gs == remove_octave(midi_note::Gs2));
+  REQUIRE(note::A  == remove_octave(midi_note::A2));
+  REQUIRE(note::As == remove_octave(midi_note::As2));
+  REQUIRE(note::B  == remove_octave(midi_note::B2));
+
+  REQUIRE(note::C  == remove_octave(midi_note::C3));
+  REQUIRE(note::Cs == remove_octave(midi_note::Cs3));
+  REQUIRE(note::D  == remove_octave(midi_note::D3));
+  REQUIRE(note::Ds == remove_octave(midi_note::Ds3));
+  REQUIRE(note::E  == remove_octave(midi_note::E3));
+  REQUIRE(note::F  == remove_octave(midi_note::F3));
+  REQUIRE(note::Fs == remove_octave(midi_note::Fs3));
+  REQUIRE(note::G  == remove_octave(midi_note::G3));
+  REQUIRE(note::Gs == remove_octave(midi_note::Gs3));
+  REQUIRE(note::A  == remove_octave(midi_note::A3));
+  REQUIRE(note::As == remove_octave(midi_note::As3));
+  REQUIRE(note::B  == remove_octave(midi_note::B3));
+
+  REQUIRE(note::C  == remove_octave(midi_note::C4));
+  REQUIRE(note::Cs == remove_octave(midi_note::Cs4));
+  REQUIRE(note::D  == remove_octave(midi_note::D4));
+  REQUIRE(note::Ds == remove_octave(midi_note::Ds4));
+  REQUIRE(note::E  == remove_octave(midi_note::E4));
+  REQUIRE(note::F  == remove_octave(midi_note::F4));
+  REQUIRE(note::Fs == remove_octave(midi_note::Fs4));
+  REQUIRE(note::G  == remove_octave(midi_note::G4));
+  REQUIRE(note::Gs == remove_octave(midi_note::Gs4));
+  REQUIRE(note::A  == remove_octave(midi_note::A4));
+  REQUIRE(note::As == remove_octave(midi_note::As4));
+  REQUIRE(note::B  == remove_octave(midi_note::B4));
+
+  REQUIRE(note::C  == remove_octave(midi_note::C5));
+  REQUIRE(note::Cs == remove_octave(midi_note::Cs5));
+  REQUIRE(note::D  == remove_octave(midi_note::D5));
+  REQUIRE(note::Ds == remove_octave(midi_note::Ds5));
+  REQUIRE(note::E  == remove_octave(midi_note::E5));
+  REQUIRE(note::F  == remove_octave(midi_note::F5));
+  REQUIRE(note::Fs == remove_octave(midi_note::Fs5));
+  REQUIRE(note::G  == remove_octave(midi_note::G5));
+  REQUIRE(note::Gs == remove_octave(midi_note::Gs5));
+  REQUIRE(note::A  == remove_octave(midi_note::A5));
+  REQUIRE(note::As == remove_octave(midi_note::As5));
+  REQUIRE(note::B  == remove_octave(midi_note::B5));
+
+  REQUIRE(note::C  == remove_octave(midi_note::C6));
+  REQUIRE(note::Cs == remove_octave(midi_note::Cs6));
+  REQUIRE(note::D  == remove_octave(midi_note::D6));
+  REQUIRE(note::Ds == remove_octave(midi_note::Ds6));
+  REQUIRE(note::E  == remove_octave(midi_note::E6));
+  REQUIRE(note::F  == remove_octave(midi_note::F6));
+  REQUIRE(note::Fs == remove_octave(midi_note::Fs6));
+  REQUIRE(note::G  == remove_octave(midi_note::G6));
+  REQUIRE(note::Gs == remove_octave(midi_note::Gs6));
+  REQUIRE(note::A  == remove_octave(midi_note::A6));
+  REQUIRE(note::As == remove_octave(midi_note::As6));
+  REQUIRE(note::B  == remove_octave(midi_note::B6));
+
+  REQUIRE(note::C  == remove_octave(midi_note::C7));
+  REQUIRE(note::Cs == remove_octave(midi_note::Cs7));
+  REQUIRE(note::D  == remove_octave(midi_note::D7));
+  REQUIRE(note::Ds == remove_octave(midi_note::Ds7));
+  REQUIRE(note::E  == remove_octave(midi_note::E7));
+  REQUIRE(note::F  == remove_octave(midi_note::F7));
+  REQUIRE(note::Fs == remove_octave(midi_note::Fs7));
+  REQUIRE(note::G  == remove_octave(midi_note::G7));
+  REQUIRE(note::Gs == remove_octave(midi_note::Gs7));
+  REQUIRE(note::A  == remove_octave(midi_note::A7));
+  REQUIRE(note::As == remove_octave(midi_note::As7));
+  REQUIRE(note::B  == remove_octave(midi_note::B7));
+
+  REQUIRE(note::C  == remove_octave(midi_note::C8));
+  REQUIRE(note::Cs == remove_octave(midi_note::Cs8));
+  REQUIRE(note::D  == remove_octave(midi_note::D8));
+  REQUIRE(note::Ds == remove_octave(midi_note::Ds8));
+  REQUIRE(note::E  == remove_octave(midi_note::E8));
+  REQUIRE(note::F  == remove_octave(midi_note::F8));
+  REQUIRE(note::Fs == remove_octave(midi_note::Fs8));
+  REQUIRE(note::G  == remove_octave(midi_note::G8));
+  REQUIRE(note::Gs == remove_octave(midi_note::Gs8));
+  REQUIRE(note::A  == remove_octave(midi_note::A8));
+  REQUIRE(note::As == remove_octave(midi_note::As8));
+  REQUIRE(note::B  == remove_octave(midi_note::B8));
+
+  REQUIRE(note::C  == remove_octave(midi_note::C9));
+  REQUIRE(note::Cs == remove_octave(midi_note::Cs9));
+  REQUIRE(note::D  == remove_octave(midi_note::D9));
+  REQUIRE(note::Ds == remove_octave(midi_note::Ds9));
+  REQUIRE(note::E  == remove_octave(midi_note::E9));
+  REQUIRE(note::F  == remove_octave(midi_note::F9));
+  REQUIRE(note::Fs == remove_octave(midi_note::Fs9));
+  REQUIRE(note::G  == remove_octave(midi_note::G9));
+}
