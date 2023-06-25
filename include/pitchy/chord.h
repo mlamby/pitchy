@@ -59,15 +59,15 @@ namespace pitchy
   }
 
   // A chord recognition result, consisting of:
-  // root note, chord_type, lowest_note_type
-  using lowest_note_type = note;
-  using chord_recognition_result = std::tuple<note, chord_type, lowest_note_type>;
+  // root note, chord_type, lowest_note_interval
+  using lowest_note_interval = interval;
+  using chord_recognition_result = std::tuple<note, chord_type, lowest_note_interval>;
 
   inline std::string to_string(const chord_recognition_result &v)
   {
-    const auto &[n, chord, lowest_note] = v;
+    const auto &[n, chord, lowest_interval] = v;
 
-    if (n == lowest_note)
+    if (interval::root == lowest_interval)
     {
       return std::format(
           "{} {}",
@@ -79,7 +79,7 @@ namespace pitchy
         "{} {} / {}",
         to_string(n),
         to_string(chord),
-        to_string(lowest_note));
+        to_string(raise_note(n, lowest_interval)));
   }
 
   namespace detail
@@ -98,7 +98,7 @@ namespace pitchy
   // Given a range of octaveless notes, attempts to find an entry in the chord_intervals
   // mapping that matches the intervals between the notes.
   template <std::ranges::viewable_range R>
-  std::vector<chord_recognition_result> recognise_chord(R &&notes, lowest_note_type lowest_note)
+  std::vector<chord_recognition_result> recognise_chord(R &&notes, note lowest_note)
   {
     std::vector<chord_recognition_result> results;
 
@@ -128,7 +128,10 @@ namespace pitchy
         // a major chord with the root of C.
         if (std::ranges::is_permutation(reference_intervals, intervals))
         {
-          results.push_back(chord_recognition_result{potential_root, chord_name, lowest_note});
+          results.push_back(chord_recognition_result{
+              potential_root,
+              chord_name,
+              note_interval(potential_root, lowest_note)});
         }
       }
     }
