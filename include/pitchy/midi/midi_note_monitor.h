@@ -17,6 +17,12 @@ namespace pitchy
     {
       using Ts::operator()...;
     };
+
+    // Explicit deduction guide. Not needed as of C++20 but the diagnostics tools
+    // don't fully support it yet.
+    template <class... Ts>
+    overloaded(Ts...) -> overloaded<Ts...>;
+
   } // namespace detail
 
   using note_on_collection_type = std::vector<midi_note>;

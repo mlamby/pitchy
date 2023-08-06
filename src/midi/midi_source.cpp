@@ -131,6 +131,11 @@ namespace pitchy
     }
   }
 
+  void midi_source::open_default_device()
+  {
+    open_device(0U);
+  }
+
   bool midi_source::is_open() const
   {
     return state->input.isPortOpen();

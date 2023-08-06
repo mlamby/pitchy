@@ -1,62 +1,34 @@
-#include <pitchy/midi/midi_note_monitor.h>
 #include <pitchy/midi/midi_source.h>
-#include <pitchy/note.h>
-#include <pitchy/chord.h>
 
-#include <cstdint>
+#include "midi_processor.h"
+
 #include <iostream>
-#include <thread>
-#include <vector>
 #include <format>
+#include <string_view>
 
 #include "argh.h"
 
-template <std::ranges::viewable_range R>
-void print_collection(std::string_view name, R&& collection)
-{
-  std::cout << std::format("{}:[", name);
-  for (auto c : collection 
-          | std::views::transform([](auto n) { return to_string(n); })
-          | std::views::join_with(','))
-  {
-    std::cout << c;
-  }
-  std::cout << "] ";
-}
+std::string_view help_message = R"(
+pitchy [-l | --list] [-h | --help] <midi_device_name>
 
-void process_midi_messages(pitchy::midi_source &source)
-{
-  std::vector<pitchy::midi_note> notes_on = {};
+  <midi_device_name>  The name (or part of the name) of the midi input device to open.
+                      The midi device name is case-insensitive.
+                      If no value is given then the default midi device will be used.
 
-  while (source.is_open())
-  {
-    auto msg = source.get_next_midi_message();
-    if (pitchy::update_note_on(notes_on, msg))
-    {
-      if(std::ranges::empty(notes_on))
-      {
-        continue;
-      }
+  [-l | --list]       Print a list of available midi devices
+  [-h | --help]       Print this help message
 
-      // Remove all the octave info and deduplicate.
-      const auto& [notes_only, lowest_note] = pitchy::remove_octaves(notes_on);
-
-      print_collection("Midi", notes_on);
-      print_collection("Notes", notes_only);
-      print_collection("Chords", pitchy::recognise_chord(notes_only, lowest_note));
-      std::cout << "\n";
-    }
-  }
-}
+)";
 
 int main(int argc, char *argv[])
 {
   try
   {
     auto cmdl = argh::parser(argc, argv);
+    const auto &pos_args = cmdl.pos_args();
     pitchy::midi_source source;
 
-    if(source.port_count() == 0)
+    if (source.port_count() == 0)
     {
       std::cout << "No midi input ports available\n";
       return 1;
@@ -70,9 +42,22 @@ int main(int argc, char *argv[])
         std::cout << std::format("  {}\n", p);
       }
     }
+    else if (cmdl[{"-h", "--help"}])
+    {
+      std::cout << help_message;
+    }
+    else if (pos_args.size() > 1)
+    {
+      source.open_named_device(pos_args[1]);
+    }
     else
     {
-      source.open_named_device("roland");
+      source.open_default_device();
+    }
+
+    if (source.is_open())
+    {
+      // Start processing midi messages.
       process_midi_messages(source);
     }
   }

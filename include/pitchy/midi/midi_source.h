@@ -28,6 +28,7 @@ namespace pitchy
       port_names_type port_names() const;
 
       void open_named_device(std::string_view name);
+      void open_default_device();
       void open_device(uint32_t index);
 
       bool is_open() const;

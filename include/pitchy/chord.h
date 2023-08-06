@@ -144,6 +144,11 @@ namespace pitchy
   // E.g. Given [A4, A5, C4] returns [A,C]
   std::pair<std::vector<note>, note> remove_octaves(const std::vector<midi_note> &midi_notes)
   {
+    if (std::ranges::empty(midi_notes))
+    {
+      return {};
+    }
+    
     // Find the lowest note that is being played.
     const auto lowest_note = pitchy::remove_octave(std::ranges::min(midi_notes));
 
