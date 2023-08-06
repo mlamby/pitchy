@@ -32,9 +32,9 @@ Midi:[E2,E3,B3,G#4] Notes:[E,G#,B] Chords:[E Major]
 
 ## Why?
 
-This is my attempt at coming up with an algorithm to detect the presence of a chord amongst a series of notes. There algorithm I came up with is captured in `recognise_chord()` defined within `chord.h`. It relies on processing a list of notes that have had their octave number removed. This can be seen in the examples above in the 'Notes:' collection. There are most likely much better recognised algorithms for doing this!
+This is my attempt at coming up with an algorithm to detect the presence of a chord amongst a series of notes. There algorithm I came up with is captured in `recognise_chord()` defined within [chord.h](include/pitchy/chord.h). It relies on processing a list of notes that have had their octave number removed. This can be seen in the examples above in the 'Notes:' collection. There are most likely much better recognised algorithms for doing this!
 
-A big limitation at the moment is that it doesn't recognise enharmics. All black notes are represented as sharps. This means a common chord like Bb Major will be recognised as the less common A# Major.
+A big limitation at the moment is that it doesn't recognise enharmonics. All black notes are represented as sharps. This means a common chord like Bb Major will be recognised as the less common A# Major.
 
 Also as a proof of concept I've only added a limited sub-set of chord extensions. It currently detects Major, Minor, Dominant, Major 7th, Minor 7th, Suspended 2nd, and Suspended 4th.
 
